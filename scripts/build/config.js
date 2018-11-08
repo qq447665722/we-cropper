@@ -40,10 +40,10 @@ function genConfig (name) {
         __VERSION__: JSON.stringify(version)
       }),
       buble(),
-      copy({
-        'dist/': 'example/we-cropper/',
-        verbose: true
-      })
+      // copy({
+      //   'dist/': 'example/we-cropper/',
+      //   verbose: true
+      // })
     ],
     output: {
       banner,

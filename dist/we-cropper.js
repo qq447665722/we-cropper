@@ -575,15 +575,39 @@ function convertToImage (canvasId, x, y, width, height, type, done) {
 
 var CanvasToBase64 = {
   convertToImage: convertToImage,
-  // convertToPNG: function (width, height, done) {
-  //   return convertToImage(width, height, 'png', done)
-  // },
-  // convertToJPEG: function (width, height, done) {
-  //   return convertToImage(width, height, 'jpeg', done)
-  // },
-  // convertToGIF: function (width, height, done) {
-  //   return convertToImage(width, height, 'gif', done)
-  // },
+  convertToPNG: function (ref, done) {
+    if ( ref === void 0 ) ref = {};
+    var canvasId = ref.canvasId;
+    var x = ref.x;
+    var y = ref.y;
+    var width = ref.width;
+    var height = ref.height;
+    if ( done === void 0 ) done = function () {};
+
+    return convertToImage(canvasId, x, y, width, height, 'png', done)
+  },
+  convertToJPEG: function (ref, done) {
+    if ( ref === void 0 ) ref = {};
+    var canvasId = ref.canvasId;
+    var x = ref.x;
+    var y = ref.y;
+    var width = ref.width;
+    var height = ref.height;
+    if ( done === void 0 ) done = function () {};
+
+    return convertToImage(canvasId, x, y, width, height, 'jpeg', done)
+  },
+  convertToGIF: function (ref, done) {
+    if ( ref === void 0 ) ref = {};
+    var canvasId = ref.canvasId;
+    var x = ref.x;
+    var y = ref.y;
+    var width = ref.width;
+    var height = ref.height;
+    if ( done === void 0 ) done = function () {};
+
+    return convertToImage(canvasId, x, y, width, height, 'gif', done)
+  },
   convertToBMP: function (ref, done) {
     if ( ref === void 0 ) ref = {};
     var canvasId = ref.canvasId;

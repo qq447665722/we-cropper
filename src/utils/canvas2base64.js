@@ -184,15 +184,15 @@ function convertToImage (canvasId, x, y, width, height, type, done = () => {}) {
 
 export default {
   convertToImage: convertToImage,
-  // convertToPNG: function (width, height, done) {
-  //   return convertToImage(width, height, 'png', done)
-  // },
-  // convertToJPEG: function (width, height, done) {
-  //   return convertToImage(width, height, 'jpeg', done)
-  // },
-  // convertToGIF: function (width, height, done) {
-  //   return convertToImage(width, height, 'gif', done)
-  // },
+  convertToPNG: function ({ canvasId, x, y, width, height } = {}, done = () => {}) {
+    return convertToImage(canvasId, x, y, width, height, 'png', done)
+  },
+  convertToJPEG: function ({ canvasId, x, y, width, height } = {}, done = () => {}) {
+    return convertToImage(canvasId, x, y, width, height, 'jpeg', done)
+  },
+  convertToGIF: function ({ canvasId, x, y, width, height } = {}, done = () => {}) {
+    return convertToImage(canvasId, x, y, width, height, 'gif', done)
+  },
   convertToBMP: function ({ canvasId, x, y, width, height } = {}, done = () => {}) {
     return convertToImage(canvasId, x, y, width, height, 'bmp', done)
   }
