@@ -60,7 +60,9 @@ export default function methods () {
     return self
   }
 
+
   self.getCropperBase64 = (done = () => {}) => {
+    // 小程序只提供Canvas转BMP接口,别花心思在这里了
     CanvasToBase64.convertToBMP({
       canvasId: id,
       x,
