@@ -33,6 +33,10 @@ function encodeData (data) {
  * @param done 完成回调
  */
 function getImageData (canvasId, x, y, width, height, done) {
+  y++
+  x++
+  height--
+  width--
   wx.canvasGetImageData({
     canvasId,
     x,

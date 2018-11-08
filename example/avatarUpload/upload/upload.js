@@ -30,7 +30,7 @@ Page({
     this.wecropper.touchEnd(e)
   },
   getCropperImage () {
-    this.wecropper.getCropperImage((avatar) => {
+    this.wecropper.getCropperBase64((avatar) => {
       if (avatar) {
         //  获取到裁剪后的图片
         wx.redirectTo({

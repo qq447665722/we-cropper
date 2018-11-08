@@ -422,6 +422,10 @@ function encodeData (data) {
  * @param done 完成回调
  */
 function getImageData (canvasId, x, y, width, height, done) {
+  y++;
+  x++;
+  height--;
+  width--;
   wx.canvasGetImageData({
     canvasId: canvasId,
     x: x,
@@ -563,27 +567,47 @@ function convertToImage (canvasId, x, y, width, height, type, done) {
 
   if (type === undefined) { type = 'png'; }
   type = fixType(type);
-  if (/bmp/.test(type)) {
-    getImageData(canvasId, x, y, width, height, function (data) {
-      var strData = genBitmapImage(data);
-      isFunction(done) && done(makeURI(strData, 'image/' + type));
-    });
-  } else {
-    console.error('暂不支持生成\'' + type + '\'类型的base64图片');
-  }
+  getImageData(canvasId, x, y, width, height, function (data) {
+    var strData = genBitmapImage(data);
+    isFunction(done) && done(makeURI(strData, type));
+  });
 }
 
 var CanvasToBase64 = {
   convertToImage: convertToImage,
-  // convertToPNG: function (width, height, done) {
-  //   return convertToImage(width, height, 'png', done)
-  // },
-  // convertToJPEG: function (width, height, done) {
-  //   return convertToImage(width, height, 'jpeg', done)
-  // },
-  // convertToGIF: function (width, height, done) {
-  //   return convertToImage(width, height, 'gif', done)
-  // },
+  convertToPNG: function (ref, done) {
+    if ( ref === void 0 ) ref = {};
+    var canvasId = ref.canvasId;
+    var x = ref.x;
+    var y = ref.y;
+    var width = ref.width;
+    var height = ref.height;
+    if ( done === void 0 ) done = function () {};
+
+    return convertToImage(canvasId, x, y, width, height, 'png', done)
+  },
+  convertToJPEG: function (ref, done) {
+    if ( ref === void 0 ) ref = {};
+    var canvasId = ref.canvasId;
+    var x = ref.x;
+    var y = ref.y;
+    var width = ref.width;
+    var height = ref.height;
+    if ( done === void 0 ) done = function () {};
+
+    return convertToImage(canvasId, x, y, width, height, 'jpeg', done)
+  },
+  convertToGIF: function (ref, done) {
+    if ( ref === void 0 ) ref = {};
+    var canvasId = ref.canvasId;
+    var x = ref.x;
+    var y = ref.y;
+    var width = ref.width;
+    var height = ref.height;
+    if ( done === void 0 ) done = function () {};
+
+    return convertToImage(canvasId, x, y, width, height, 'gif', done)
+  },
   convertToBMP: function (ref, done) {
     if ( ref === void 0 ) ref = {};
     var canvasId = ref.canvasId;
@@ -664,7 +688,7 @@ function methods () {
   self.getCropperBase64 = function (done) {
     if ( done === void 0 ) done = function () {};
 
-    CanvasToBase64.convertToBMP({
+    CanvasToBase64.convertToPNG({
       canvasId: id,
       x: x,
       y: y,
