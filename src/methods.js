@@ -61,7 +61,7 @@ export default function methods () {
   }
 
   self.getCropperBase64 = (done = () => {}) => {
-    CanvasToBase64.convertToPNG({
+    CanvasToBase64.convertToBMP({
       canvasId: id,
       x,
       y,

@@ -688,7 +688,7 @@ function methods () {
   self.getCropperBase64 = function (done) {
     if ( done === void 0 ) done = function () {};
 
-    CanvasToBase64.convertToPNG({
+    CanvasToBase64.convertToBMP({
       canvasId: id,
       x: x,
       y: y,
