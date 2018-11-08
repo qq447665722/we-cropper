@@ -563,14 +563,10 @@ function convertToImage (canvasId, x, y, width, height, type, done) {
 
   if (type === undefined) { type = 'png'; }
   type = fixType(type);
-  if (/bmp/.test(type)) {
-    getImageData(canvasId, x, y, width, height, function (data) {
-      var strData = genBitmapImage(data);
-      isFunction(done) && done(makeURI(strData, 'image/' + type));
-    });
-  } else {
-    console.error('暂不支持生成\'' + type + '\'类型的base64图片');
-  }
+  getImageData(canvasId, x, y, width, height, function (data) {
+    var strData = genBitmapImage(data);
+    isFunction(done) && done(makeURI(strData, type));
+  });
 }
 
 var CanvasToBase64 = {
@@ -688,7 +684,7 @@ function methods () {
   self.getCropperBase64 = function (done) {
     if ( done === void 0 ) done = function () {};
 
-    CanvasToBase64.convertToBMP({
+    CanvasToBase64.convertToPNG({
       canvasId: id,
       x: x,
       y: y,

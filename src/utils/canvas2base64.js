@@ -172,14 +172,10 @@ function genBitmapImage (oData) {
 function convertToImage (canvasId, x, y, width, height, type, done = () => {}) {
   if (type === undefined) { type = 'png' }
   type = fixType(type)
-  if (/bmp/.test(type)) {
-    getImageData(canvasId, x, y, width, height, (data) => {
-      const strData = genBitmapImage(data)
-      isFunction(done) && done(makeURI(strData, 'image/' + type))
-    })
-  } else {
-    console.error('暂不支持生成\'' + type + '\'类型的base64图片')
-  }
+  getImageData(canvasId, x, y, width, height, (data) => {
+    const strData = genBitmapImage(data)
+    isFunction(done) && done(makeURI(strData, type))
+  })
 }
 
 export default {
