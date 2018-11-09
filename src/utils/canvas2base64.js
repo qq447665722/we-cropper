@@ -44,6 +44,18 @@ function getImageData (canvasId, x, y, width, height, done) {
     width,
     height,
     success (res) {
+      if (wx.getSystemInfoSync().platform === 'ios') {
+        var w = res.width
+        var h = res.height
+        let con = 0
+        for (var i = 0; i < h / 2; i++) {
+          for (var j = 0; j < w * 4; j++) {
+            con = res.data[i * w * 4 + j]
+            res.data[i * w * 4 + j] = res.data[(h - i - 1) * w * 4 + j]
+            res.data[(h - i - 1) * w * 4 + j] = con
+          }
+        }
+      }
       done(res)
     },
     fail (res) {
@@ -184,15 +196,15 @@ function convertToImage (canvasId, x, y, width, height, type, done = () => {}) {
 
 export default {
   convertToImage: convertToImage,
-  convertToPNG: function ({ canvasId, x, y, width, height } = {}, done = () => {}) {
-    return convertToImage(canvasId, x, y, width, height, 'png', done)
-  },
-  convertToJPEG: function ({ canvasId, x, y, width, height } = {}, done = () => {}) {
-    return convertToImage(canvasId, x, y, width, height, 'jpeg', done)
-  },
-  convertToGIF: function ({ canvasId, x, y, width, height } = {}, done = () => {}) {
-    return convertToImage(canvasId, x, y, width, height, 'gif', done)
-  },
+  // convertToPNG: function ({ canvasId, x, y, width, height } = {}, done = () => {}) {
+  //   return convertToImage(canvasId, x, y, width, height, 'png', done)
+  // },
+  // convertToJPEG: function ({ canvasId, x, y, width, height } = {}, done = () => {}) {
+  //   return convertToImage(canvasId, x, y, width, height, 'jpeg', done)
+  // },
+  // convertToGIF: function ({ canvasId, x, y, width, height } = {}, done = () => {}) {
+  //   return convertToImage(canvasId, x, y, width, height, 'gif', done)
+  // },
   convertToBMP: function ({ canvasId, x, y, width, height } = {}, done = () => {}) {
     return convertToImage(canvasId, x, y, width, height, 'bmp', done)
   }
