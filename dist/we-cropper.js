@@ -433,18 +433,19 @@ function getImageData (canvasId, x, y, width, height, done) {
     width: width,
     height: height,
     success: function success (res) {
-      if (wx.getSystemInfoSync().platform === 'ios') {
-        var w = res.width;
-        var h = res.height;
-        var con = 0;
-        for (var i = 0; i < h / 2; i++) {
-          for (var j = 0; j < w * 4; j++) {
-            con = res.data[i * w * 4 + j];
-            res.data[i * w * 4 + j] = res.data[(h - i - 1) * w * 4 + j];
-            res.data[(h - i - 1) * w * 4 + j] = con;
-          }
-        }
-      }
+      // console.log('platform',wx.getSystemInfoSync().platform)
+      // if (wx.getSystemInfoSync().platform === 'ios') {
+      //   var w = res.width
+      //   var h = res.height
+      //   let con = 0
+      //   for (var i = 0; i < h / 2; i++) {
+      //     for (var j = 0; j < w * 4; j++) {
+      //       con = res.data[i * w * 4 + j]
+      //       res.data[i * w * 4 + j] = res.data[(h - i - 1) * w * 4 + j]
+      //       res.data[(h - i - 1) * w * 4 + j] = con
+      //     }
+      //   }
+      // }
       done(res);
     },
     fail: function fail (res) {
